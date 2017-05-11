@@ -1,0 +1,72 @@
+library IEEE ;
+use IEEE.std_logic_1164.all ;
+
+
+entity bit_adder_8 is
+port ( A,B,C : in bit; --input ports
+Sum, Carry : out bit); --output ports
+end bit_adder_8;
+
+-- Structure view of Half Adder
+architecture structure_view_8_bit_adder of bit_adder_8 is
+
+-- Remember to add the gates you're using
+-- into this portion of the code!
+
+component not_gate
+port(I : in bit; O : out bit);
+end component;
+
+
+component and_gate_3_input
+port(I1,I2, I3 : in bit; O: out bit);
+end component;
+
+
+component and_gate
+port(I1,I2 : in bit; O: out bit);
+end component;
+
+component or_gate
+port(I1,I2 : in bit; O : out bit);
+end component;
+
+
+component or_gate_3_inputs
+port(I1,I2,I3 : in bit; O : out bit);
+end component;
+
+
+component or_gate_4_inputs
+port(I1,I2,I3,I4 : in bit; O : out bit);
+end component;
+
+
+
+
+-- Remember to add the signals you're using
+-- into this portion of the code!
+
+signal A_not, B_not, C_not, op1, op2, op3, op4, op5, op6, op7 : bit;
+
+
+begin
+
+
+ G1: not_gate port map (A, A_not);
+ G2: not_gate port map (B, B_not);
+ G3: not_gate port map (C, C_not);
+ 
+ G4: and_gate_3_input port map (A_not, B_not, C, op1);
+ G5: and_gate_3_input port map (A_not, B, C_not, op2);
+ G6: and_gate_3_input port map (A, B_not, C_not, op3);
+ G7: and_gate_3_input port map (A, B, C, op4);
+ G8: or_gate_4_inputs port map (op1, op2, op3, op4, Sum);
+ 
+ G9: and_gate port map (B,C, op5);
+ G10: and_gate port map (A,C, op6);
+ G11: and_gate port map (A,B, op7);
+ G12: or_gate_3_inputs port map (op5, op6, op7, Carry);
+ 
+
+end structure_view_8_bit_adder;

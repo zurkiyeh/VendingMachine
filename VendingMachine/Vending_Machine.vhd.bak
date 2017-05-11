@@ -1,0 +1,31 @@
+library ieee ;
+use ieee.std_logic_1164.all ;
+
+
+entity Vending_Machine is port (
+Data Inputs, Control Inputs : in standard_logic or standard_logic_vector;
+Data Outputs, Control Outputs : in standard_logic or standard_logic_vector;
+clk : in std_logic ) ;
+end Vending_Machine ;
+
+
+architecture rtl of Vending_Machine is
+Signal Conditions, Control Signals;
+component datapath port (
+Data Inputs, Control Signals: in stadard_logic or standard_logic_vector;
+Conditions, Data Outputs: out standard_logic or standard_logic_vector;
+clk : in std_logic
+) ;
+end component ;
+component controller (
+Control Inputs, Conditions: in standard_logic or standard_logic_vector;
+Control Outputs, Control Signals: out standard_logic or standard_logic_vector;
+clk : in std_logic
+) ;
+end component ;
+begin
+d1: datapath port map (Data Inputs, Control Signals,
+Conditions, Data Outputs, clk ) ;
+c1: controller port map (Control Inputs, Conditions,
+Control Outputs, Control Signals, clk ) ;
+end rtl ;

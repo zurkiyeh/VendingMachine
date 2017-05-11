@@ -1,0 +1,24 @@
+library IEEE ;
+use IEEE.std_logic_1164.all ;
+use ieee.numeric_std.all;
+
+
+entity twosComp is
+
+port(
+A : in std_logic_vector(7 downto 0);
+B : out std_logic_vector(7 downto 0)
+);
+end twosComp;
+
+
+architecture twosComp_implem of twosComp is
+signal temp: std_logic_vector (7 downto 0);
+begin
+
+	temp <= not A;
+	B    <= std_logic_vector(unsigned(temp) + 1) after 10 ns;
+	
+	
+
+end twosComp_implem;

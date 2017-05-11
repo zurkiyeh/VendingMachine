@@ -1,0 +1,1983 @@
+|Vending_Machine
+C => controller:controll_process.coin_Detected
+Choice => controller:controll_process.soda_choice
+rst => controller:controll_process.reset
+rst => E~0.OUTPUTSELECT
+rst => E~1.OUTPUTSELECT
+rst => E~2.OUTPUTSELECT
+rst => E~3.OUTPUTSELECT
+rst => E~4.OUTPUTSELECT
+rst => E~5.OUTPUTSELECT
+rst => E~6.OUTPUTSELECT
+rst => E~7.OUTPUTSELECT
+rst => P~0.OUTPUTSELECT
+rst => P~1.OUTPUTSELECT
+rst => P~2.OUTPUTSELECT
+rst => P~3.OUTPUTSELECT
+rst => P~4.OUTPUTSELECT
+rst => P~5.OUTPUTSELECT
+rst => P~6.OUTPUTSELECT
+rst => P~7.OUTPUTSELECT
+V[0] => controller:controll_process.value_cents[0]
+V[1] => controller:controll_process.value_cents[1]
+V[2] => controller:controll_process.value_cents[2]
+V[3] => controller:controll_process.value_cents[3]
+V[4] => controller:controll_process.value_cents[4]
+V[5] => controller:controll_process.value_cents[5]
+V[6] => controller:controll_process.value_cents[6]
+V[7] => controller:controll_process.value_cents[7]
+S0[0] => controller:controll_process.soda_price_0[0]
+S0[1] => controller:controll_process.soda_price_0[1]
+S0[2] => controller:controll_process.soda_price_0[2]
+S0[3] => controller:controll_process.soda_price_0[3]
+S0[4] => controller:controll_process.soda_price_0[4]
+S0[5] => controller:controll_process.soda_price_0[5]
+S0[6] => controller:controll_process.soda_price_0[6]
+S0[7] => controller:controll_process.soda_price_0[7]
+S1[0] => controller:controll_process.soda_price_1[0]
+S1[1] => controller:controll_process.soda_price_1[1]
+S1[2] => controller:controll_process.soda_price_1[2]
+S1[3] => controller:controll_process.soda_price_1[3]
+S1[4] => controller:controll_process.soda_price_1[4]
+S1[5] => controller:controll_process.soda_price_1[5]
+S1[6] => controller:controll_process.soda_price_1[6]
+S1[7] => controller:controll_process.soda_price_1[7]
+P[0] <= P~7.DB_MAX_OUTPUT_PORT_TYPE
+P[1] <= P~6.DB_MAX_OUTPUT_PORT_TYPE
+P[2] <= P~5.DB_MAX_OUTPUT_PORT_TYPE
+P[3] <= P~4.DB_MAX_OUTPUT_PORT_TYPE
+P[4] <= P~3.DB_MAX_OUTPUT_PORT_TYPE
+P[5] <= P~2.DB_MAX_OUTPUT_PORT_TYPE
+P[6] <= P~1.DB_MAX_OUTPUT_PORT_TYPE
+P[7] <= P~0.DB_MAX_OUTPUT_PORT_TYPE
+E[0] <= E~7.DB_MAX_OUTPUT_PORT_TYPE
+E[1] <= E~6.DB_MAX_OUTPUT_PORT_TYPE
+E[2] <= E~5.DB_MAX_OUTPUT_PORT_TYPE
+E[3] <= E~4.DB_MAX_OUTPUT_PORT_TYPE
+E[4] <= E~3.DB_MAX_OUTPUT_PORT_TYPE
+E[5] <= E~2.DB_MAX_OUTPUT_PORT_TYPE
+E[6] <= E~1.DB_MAX_OUTPUT_PORT_TYPE
+E[7] <= E~0.DB_MAX_OUTPUT_PORT_TYPE
+D[0] <= controller:controll_process.soda_Dispense[0]
+D[1] <= controller:controll_process.soda_Dispense[1]
+clk => controller:controll_process.clk
+clk => datapath:datapath_Process.clk
+
+
+|Vending_Machine|controller:controll_process
+clk => present_state.CLK
+coin_Detected => value_Coin~0.OUTPUTSELECT
+coin_Detected => value_Coin~1.OUTPUTSELECT
+coin_Detected => value_Coin~2.OUTPUTSELECT
+coin_Detected => value_Coin~3.OUTPUTSELECT
+coin_Detected => value_Coin~4.OUTPUTSELECT
+coin_Detected => value_Coin~5.OUTPUTSELECT
+coin_Detected => value_Coin~6.OUTPUTSELECT
+coin_Detected => value_Coin~7.OUTPUTSELECT
+value_cents[0] => value_Coin~7.DATAB
+value_cents[1] => value_Coin~6.DATAB
+value_cents[2] => value_Coin~5.DATAB
+value_cents[3] => value_Coin~4.DATAB
+value_cents[4] => value_Coin~3.DATAB
+value_cents[5] => value_Coin~2.DATAB
+value_cents[6] => value_Coin~1.DATAB
+value_cents[7] => value_Coin~0.DATAB
+soda_price_0[0] => price~7.DATAB
+soda_price_0[1] => price~6.DATAB
+soda_price_0[2] => price~5.DATAB
+soda_price_0[3] => price~4.DATAB
+soda_price_0[4] => price~3.DATAB
+soda_price_0[5] => price~2.DATAB
+soda_price_0[6] => price~1.DATAB
+soda_price_0[7] => price~0.DATAB
+soda_price_1[0] => price~7.DATAA
+soda_price_1[1] => price~6.DATAA
+soda_price_1[2] => price~5.DATAA
+soda_price_1[3] => price~4.DATAA
+soda_price_1[4] => price~3.DATAA
+soda_price_1[5] => price~2.DATAA
+soda_price_1[6] => price~1.DATAA
+soda_price_1[7] => price~0.DATAA
+soda_choice => soda_Dispense~0.DATAA
+soda_choice => price~0.OUTPUTSELECT
+soda_choice => price~1.OUTPUTSELECT
+soda_choice => price~2.OUTPUTSELECT
+soda_choice => price~3.OUTPUTSELECT
+soda_choice => price~4.OUTPUTSELECT
+soda_choice => price~5.OUTPUTSELECT
+soda_choice => price~6.OUTPUTSELECT
+soda_choice => price~7.OUTPUTSELECT
+soda_choice => soda_Dispense~1.DATAA
+reset => register_rst~0.OUTPUTSELECT
+reset => enable_change_reg~2.OUTPUTSELECT
+comp_greater_in => enable_change_reg~0.DATAA
+comp_smaller_in => enable_change_reg~0.OUTPUTSELECT
+comp_smaller_in => next_state.DATAB
+comp_equal_in => ~NO_FANOUT~
+soda_Dispense[0] <= soda_Dispense~1.DB_MAX_OUTPUT_PORT_TYPE
+soda_Dispense[1] <= soda_Dispense~0.DB_MAX_OUTPUT_PORT_TYPE
+value_Coin[0] <= value_Coin~7.DB_MAX_OUTPUT_PORT_TYPE
+value_Coin[1] <= value_Coin~6.DB_MAX_OUTPUT_PORT_TYPE
+value_Coin[2] <= value_Coin~5.DB_MAX_OUTPUT_PORT_TYPE
+value_Coin[3] <= value_Coin~4.DB_MAX_OUTPUT_PORT_TYPE
+value_Coin[4] <= value_Coin~3.DB_MAX_OUTPUT_PORT_TYPE
+value_Coin[5] <= value_Coin~2.DB_MAX_OUTPUT_PORT_TYPE
+value_Coin[6] <= value_Coin~1.DB_MAX_OUTPUT_PORT_TYPE
+value_Coin[7] <= value_Coin~0.DB_MAX_OUTPUT_PORT_TYPE
+price[0] <= price~7.DB_MAX_OUTPUT_PORT_TYPE
+price[1] <= price~6.DB_MAX_OUTPUT_PORT_TYPE
+price[2] <= price~5.DB_MAX_OUTPUT_PORT_TYPE
+price[3] <= price~4.DB_MAX_OUTPUT_PORT_TYPE
+price[4] <= price~3.DB_MAX_OUTPUT_PORT_TYPE
+price[5] <= price~2.DB_MAX_OUTPUT_PORT_TYPE
+price[6] <= price~1.DB_MAX_OUTPUT_PORT_TYPE
+price[7] <= price~0.DB_MAX_OUTPUT_PORT_TYPE
+enable_change_reg <= enable_change_reg~2.DB_MAX_OUTPUT_PORT_TYPE
+register_rst <= register_rst~0.DB_MAX_OUTPUT_PORT_TYPE
+reset_system <= <VCC>
+
+
+|Vending_Machine|datapath:datapath_Process
+clk => accumulator_8_bits:accumilate_output.clk
+clk => reg8:total_Register.clk
+clk => reg8:change_Register.clk
+reset => ~NO_FANOUT~
+soda_Value[0] => accumulator_8_bits:accumilate_output.data_in[0]
+soda_Value[1] => accumulator_8_bits:accumilate_output.data_in[1]
+soda_Value[2] => accumulator_8_bits:accumilate_output.data_in[2]
+soda_Value[3] => accumulator_8_bits:accumilate_output.data_in[3]
+soda_Value[4] => accumulator_8_bits:accumilate_output.data_in[4]
+soda_Value[5] => accumulator_8_bits:accumilate_output.data_in[5]
+soda_Value[6] => accumulator_8_bits:accumilate_output.data_in[6]
+soda_Value[7] => accumulator_8_bits:accumilate_output.data_in[7]
+cost[0] => twosComp:complementValue.A[0]
+cost[0] => comp8bit:comapring_price.b[0]
+cost[1] => twosComp:complementValue.A[1]
+cost[1] => comp8bit:comapring_price.b[1]
+cost[2] => twosComp:complementValue.A[2]
+cost[2] => comp8bit:comapring_price.b[2]
+cost[3] => twosComp:complementValue.A[3]
+cost[3] => comp8bit:comapring_price.b[3]
+cost[4] => twosComp:complementValue.A[4]
+cost[4] => comp8bit:comapring_price.b[4]
+cost[5] => twosComp:complementValue.A[5]
+cost[5] => comp8bit:comapring_price.b[5]
+cost[6] => twosComp:complementValue.A[6]
+cost[6] => comp8bit:comapring_price.b[6]
+cost[7] => twosComp:complementValue.A[7]
+cost[7] => comp8bit:comapring_price.b[7]
+enable_Change => reg8:change_Register.synch_reset
+accumilate_reset => accumulator_8_bits:accumilate_output.rst
+accumilate_reset => reg8:total_Register.synch_reset
+comp_Greater <= comp8bit:comapring_price.gtr
+comp_Smaller <= comp8bit:comapring_price.les
+comp_Equal <= comp8bit:comapring_price.eq
+final_Total[0] <= reg8:total_Register.q[0]
+final_Total[1] <= reg8:total_Register.q[1]
+final_Total[2] <= reg8:total_Register.q[2]
+final_Total[3] <= reg8:total_Register.q[3]
+final_Total[4] <= reg8:total_Register.q[4]
+final_Total[5] <= reg8:total_Register.q[5]
+final_Total[6] <= reg8:total_Register.q[6]
+final_Total[7] <= reg8:total_Register.q[7]
+final_Change[0] <= reg8:change_Register.q[0]
+final_Change[1] <= reg8:change_Register.q[1]
+final_Change[2] <= reg8:change_Register.q[2]
+final_Change[3] <= reg8:change_Register.q[3]
+final_Change[4] <= reg8:change_Register.q[4]
+final_Change[5] <= reg8:change_Register.q[5]
+final_Change[6] <= reg8:change_Register.q[6]
+final_Change[7] <= reg8:change_Register.q[7]
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output
+data_in[0] => bit_adder_8_implementation:adder_output.A[0]
+data_in[1] => bit_adder_8_implementation:adder_output.A[1]
+data_in[2] => bit_adder_8_implementation:adder_output.A[2]
+data_in[3] => bit_adder_8_implementation:adder_output.A[3]
+data_in[4] => bit_adder_8_implementation:adder_output.A[4]
+data_in[5] => bit_adder_8_implementation:adder_output.A[5]
+data_in[6] => bit_adder_8_implementation:adder_output.A[6]
+data_in[7] => bit_adder_8_implementation:adder_output.A[7]
+clk => reg8:reg_output.clk
+rst => reg8:reg_output.synch_reset
+data_out[0] <= reg8:reg_output.q[0]
+data_out[1] <= reg8:reg_output.q[1]
+data_out[2] <= reg8:reg_output.q[2]
+data_out[3] <= reg8:reg_output.q[3]
+data_out[4] <= reg8:reg_output.q[4]
+data_out[5] <= reg8:reg_output.q[5]
+data_out[6] <= reg8:reg_output.q[6]
+data_out[7] <= reg8:reg_output.q[7]
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output
+A[0] => bit_adder_8:bit_1.A
+A[1] => bit_adder_8:bit_2.A
+A[2] => bit_adder_8:bit_3.A
+A[3] => bit_adder_8:bit_4.A
+A[4] => bit_adder_8:bit_5.A
+A[5] => bit_adder_8:bit_6.A
+A[6] => bit_adder_8:bit_7.A
+A[7] => bit_adder_8:bit_8.A
+B[0] => bit_adder_8:bit_1.B
+B[1] => bit_adder_8:bit_2.B
+B[2] => bit_adder_8:bit_3.B
+B[3] => bit_adder_8:bit_4.B
+B[4] => bit_adder_8:bit_5.B
+B[5] => bit_adder_8:bit_6.B
+B[6] => bit_adder_8:bit_7.B
+B[7] => bit_adder_8:bit_8.B
+Sum[0] <= bit_adder_8:bit_1.Sum
+Sum[1] <= bit_adder_8:bit_2.Sum
+Sum[2] <= bit_adder_8:bit_3.Sum
+Sum[3] <= bit_adder_8:bit_4.Sum
+Sum[4] <= bit_adder_8:bit_5.Sum
+Sum[5] <= bit_adder_8:bit_6.Sum
+Sum[6] <= bit_adder_8:bit_7.Sum
+Sum[7] <= bit_adder_8:bit_8.Sum
+Carry <= bit_adder_8:bit_8.Carry
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_1
+A => not_gate:G1.I
+A => and_gate_3_input:G6.I1
+A => and_gate_3_input:G7.I1
+A => and_gate:G10.I1
+A => and_gate:G11.I1
+B => not_gate:G2.I
+B => and_gate_3_input:G5.I2
+B => and_gate_3_input:G7.I2
+B => and_gate:G9.I1
+B => and_gate:G11.I2
+C => not_gate:G3.I
+C => and_gate_3_input:G4.I3
+C => and_gate_3_input:G7.I3
+C => and_gate:G9.I2
+C => and_gate:G10.I2
+Sum <= or_gate_4_inputs:G8.O
+Carry <= or_gate_3_inputs:G12.O
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_1|not_gate:G1
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_1|not_gate:G2
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_1|not_gate:G3
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_1|and_gate_3_input:G4
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_1|and_gate_3_input:G5
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_1|and_gate_3_input:G6
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_1|and_gate_3_input:G7
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_1|or_gate_4_inputs:G8
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+I4 => O~2.IN1
+O <= O~2.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_1|and_gate:G9
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_1|and_gate:G10
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_1|and_gate:G11
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_1|or_gate_3_inputs:G12
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_2
+A => not_gate:G1.I
+A => and_gate_3_input:G6.I1
+A => and_gate_3_input:G7.I1
+A => and_gate:G10.I1
+A => and_gate:G11.I1
+B => not_gate:G2.I
+B => and_gate_3_input:G5.I2
+B => and_gate_3_input:G7.I2
+B => and_gate:G9.I1
+B => and_gate:G11.I2
+C => not_gate:G3.I
+C => and_gate_3_input:G4.I3
+C => and_gate_3_input:G7.I3
+C => and_gate:G9.I2
+C => and_gate:G10.I2
+Sum <= or_gate_4_inputs:G8.O
+Carry <= or_gate_3_inputs:G12.O
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_2|not_gate:G1
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_2|not_gate:G2
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_2|not_gate:G3
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_2|and_gate_3_input:G4
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_2|and_gate_3_input:G5
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_2|and_gate_3_input:G6
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_2|and_gate_3_input:G7
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_2|or_gate_4_inputs:G8
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+I4 => O~2.IN1
+O <= O~2.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_2|and_gate:G9
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_2|and_gate:G10
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_2|and_gate:G11
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_2|or_gate_3_inputs:G12
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_3
+A => not_gate:G1.I
+A => and_gate_3_input:G6.I1
+A => and_gate_3_input:G7.I1
+A => and_gate:G10.I1
+A => and_gate:G11.I1
+B => not_gate:G2.I
+B => and_gate_3_input:G5.I2
+B => and_gate_3_input:G7.I2
+B => and_gate:G9.I1
+B => and_gate:G11.I2
+C => not_gate:G3.I
+C => and_gate_3_input:G4.I3
+C => and_gate_3_input:G7.I3
+C => and_gate:G9.I2
+C => and_gate:G10.I2
+Sum <= or_gate_4_inputs:G8.O
+Carry <= or_gate_3_inputs:G12.O
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_3|not_gate:G1
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_3|not_gate:G2
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_3|not_gate:G3
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_3|and_gate_3_input:G4
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_3|and_gate_3_input:G5
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_3|and_gate_3_input:G6
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_3|and_gate_3_input:G7
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_3|or_gate_4_inputs:G8
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+I4 => O~2.IN1
+O <= O~2.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_3|and_gate:G9
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_3|and_gate:G10
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_3|and_gate:G11
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_3|or_gate_3_inputs:G12
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_4
+A => not_gate:G1.I
+A => and_gate_3_input:G6.I1
+A => and_gate_3_input:G7.I1
+A => and_gate:G10.I1
+A => and_gate:G11.I1
+B => not_gate:G2.I
+B => and_gate_3_input:G5.I2
+B => and_gate_3_input:G7.I2
+B => and_gate:G9.I1
+B => and_gate:G11.I2
+C => not_gate:G3.I
+C => and_gate_3_input:G4.I3
+C => and_gate_3_input:G7.I3
+C => and_gate:G9.I2
+C => and_gate:G10.I2
+Sum <= or_gate_4_inputs:G8.O
+Carry <= or_gate_3_inputs:G12.O
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_4|not_gate:G1
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_4|not_gate:G2
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_4|not_gate:G3
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_4|and_gate_3_input:G4
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_4|and_gate_3_input:G5
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_4|and_gate_3_input:G6
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_4|and_gate_3_input:G7
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_4|or_gate_4_inputs:G8
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+I4 => O~2.IN1
+O <= O~2.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_4|and_gate:G9
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_4|and_gate:G10
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_4|and_gate:G11
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_4|or_gate_3_inputs:G12
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_5
+A => not_gate:G1.I
+A => and_gate_3_input:G6.I1
+A => and_gate_3_input:G7.I1
+A => and_gate:G10.I1
+A => and_gate:G11.I1
+B => not_gate:G2.I
+B => and_gate_3_input:G5.I2
+B => and_gate_3_input:G7.I2
+B => and_gate:G9.I1
+B => and_gate:G11.I2
+C => not_gate:G3.I
+C => and_gate_3_input:G4.I3
+C => and_gate_3_input:G7.I3
+C => and_gate:G9.I2
+C => and_gate:G10.I2
+Sum <= or_gate_4_inputs:G8.O
+Carry <= or_gate_3_inputs:G12.O
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_5|not_gate:G1
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_5|not_gate:G2
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_5|not_gate:G3
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_5|and_gate_3_input:G4
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_5|and_gate_3_input:G5
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_5|and_gate_3_input:G6
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_5|and_gate_3_input:G7
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_5|or_gate_4_inputs:G8
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+I4 => O~2.IN1
+O <= O~2.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_5|and_gate:G9
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_5|and_gate:G10
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_5|and_gate:G11
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_5|or_gate_3_inputs:G12
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_6
+A => not_gate:G1.I
+A => and_gate_3_input:G6.I1
+A => and_gate_3_input:G7.I1
+A => and_gate:G10.I1
+A => and_gate:G11.I1
+B => not_gate:G2.I
+B => and_gate_3_input:G5.I2
+B => and_gate_3_input:G7.I2
+B => and_gate:G9.I1
+B => and_gate:G11.I2
+C => not_gate:G3.I
+C => and_gate_3_input:G4.I3
+C => and_gate_3_input:G7.I3
+C => and_gate:G9.I2
+C => and_gate:G10.I2
+Sum <= or_gate_4_inputs:G8.O
+Carry <= or_gate_3_inputs:G12.O
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_6|not_gate:G1
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_6|not_gate:G2
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_6|not_gate:G3
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_6|and_gate_3_input:G4
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_6|and_gate_3_input:G5
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_6|and_gate_3_input:G6
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_6|and_gate_3_input:G7
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_6|or_gate_4_inputs:G8
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+I4 => O~2.IN1
+O <= O~2.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_6|and_gate:G9
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_6|and_gate:G10
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_6|and_gate:G11
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_6|or_gate_3_inputs:G12
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_7
+A => not_gate:G1.I
+A => and_gate_3_input:G6.I1
+A => and_gate_3_input:G7.I1
+A => and_gate:G10.I1
+A => and_gate:G11.I1
+B => not_gate:G2.I
+B => and_gate_3_input:G5.I2
+B => and_gate_3_input:G7.I2
+B => and_gate:G9.I1
+B => and_gate:G11.I2
+C => not_gate:G3.I
+C => and_gate_3_input:G4.I3
+C => and_gate_3_input:G7.I3
+C => and_gate:G9.I2
+C => and_gate:G10.I2
+Sum <= or_gate_4_inputs:G8.O
+Carry <= or_gate_3_inputs:G12.O
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_7|not_gate:G1
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_7|not_gate:G2
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_7|not_gate:G3
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_7|and_gate_3_input:G4
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_7|and_gate_3_input:G5
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_7|and_gate_3_input:G6
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_7|and_gate_3_input:G7
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_7|or_gate_4_inputs:G8
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+I4 => O~2.IN1
+O <= O~2.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_7|and_gate:G9
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_7|and_gate:G10
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_7|and_gate:G11
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_7|or_gate_3_inputs:G12
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_8
+A => not_gate:G1.I
+A => and_gate_3_input:G6.I1
+A => and_gate_3_input:G7.I1
+A => and_gate:G10.I1
+A => and_gate:G11.I1
+B => not_gate:G2.I
+B => and_gate_3_input:G5.I2
+B => and_gate_3_input:G7.I2
+B => and_gate:G9.I1
+B => and_gate:G11.I2
+C => not_gate:G3.I
+C => and_gate_3_input:G4.I3
+C => and_gate_3_input:G7.I3
+C => and_gate:G9.I2
+C => and_gate:G10.I2
+Sum <= or_gate_4_inputs:G8.O
+Carry <= or_gate_3_inputs:G12.O
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_8|not_gate:G1
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_8|not_gate:G2
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_8|not_gate:G3
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_8|and_gate_3_input:G4
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_8|and_gate_3_input:G5
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_8|and_gate_3_input:G6
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_8|and_gate_3_input:G7
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_8|or_gate_4_inputs:G8
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+I4 => O~2.IN1
+O <= O~2.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_8|and_gate:G9
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_8|and_gate:G10
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_8|and_gate:G11
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|bit_adder_8_implementation:adder_output|bit_adder_8:bit_8|or_gate_3_inputs:G12
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|accumulator_8_bits:accumilate_output|reg8:reg_output
+d[0] => q~7.DATAA
+d[1] => q~6.DATAA
+d[2] => q~5.DATAA
+d[3] => q~4.DATAA
+d[4] => q~3.DATAA
+d[5] => q~2.DATAA
+d[6] => q~1.DATAA
+d[7] => q~0.DATAA
+clk => q[0]~reg0.CLK
+clk => q[1]~reg0.CLK
+clk => q[2]~reg0.CLK
+clk => q[3]~reg0.CLK
+clk => q[4]~reg0.CLK
+clk => q[5]~reg0.CLK
+clk => q[6]~reg0.CLK
+clk => q[7]~reg0.CLK
+synch_reset => q~0.OUTPUTSELECT
+synch_reset => q~1.OUTPUTSELECT
+synch_reset => q~2.OUTPUTSELECT
+synch_reset => q~3.OUTPUTSELECT
+synch_reset => q~4.OUTPUTSELECT
+synch_reset => q~5.OUTPUTSELECT
+synch_reset => q~6.OUTPUTSELECT
+synch_reset => q~7.OUTPUTSELECT
+q[0] <= q[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[1] <= q[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[2] <= q[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[3] <= q[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[4] <= q[4]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[5] <= q[5]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[6] <= q[6]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[7] <= q[7]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|reg8:total_Register
+d[0] => q~7.DATAA
+d[1] => q~6.DATAA
+d[2] => q~5.DATAA
+d[3] => q~4.DATAA
+d[4] => q~3.DATAA
+d[5] => q~2.DATAA
+d[6] => q~1.DATAA
+d[7] => q~0.DATAA
+clk => q[0]~reg0.CLK
+clk => q[1]~reg0.CLK
+clk => q[2]~reg0.CLK
+clk => q[3]~reg0.CLK
+clk => q[4]~reg0.CLK
+clk => q[5]~reg0.CLK
+clk => q[6]~reg0.CLK
+clk => q[7]~reg0.CLK
+synch_reset => q~0.OUTPUTSELECT
+synch_reset => q~1.OUTPUTSELECT
+synch_reset => q~2.OUTPUTSELECT
+synch_reset => q~3.OUTPUTSELECT
+synch_reset => q~4.OUTPUTSELECT
+synch_reset => q~5.OUTPUTSELECT
+synch_reset => q~6.OUTPUTSELECT
+synch_reset => q~7.OUTPUTSELECT
+q[0] <= q[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[1] <= q[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[2] <= q[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[3] <= q[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[4] <= q[4]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[5] <= q[5]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[6] <= q[6]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[7] <= q[7]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|twosComp:complementValue
+A[0] => Add0.IN16
+A[1] => Add0.IN15
+A[2] => Add0.IN14
+A[3] => Add0.IN13
+A[4] => Add0.IN12
+A[5] => Add0.IN11
+A[6] => Add0.IN10
+A[7] => Add0.IN9
+B[0] <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+B[1] <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+B[2] <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+B[3] <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+B[4] <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+B[5] <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+B[6] <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+B[7] <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput
+A[0] => bit_adder_8:bit_1.A
+A[1] => bit_adder_8:bit_2.A
+A[2] => bit_adder_8:bit_3.A
+A[3] => bit_adder_8:bit_4.A
+A[4] => bit_adder_8:bit_5.A
+A[5] => bit_adder_8:bit_6.A
+A[6] => bit_adder_8:bit_7.A
+A[7] => bit_adder_8:bit_8.A
+B[0] => bit_adder_8:bit_1.B
+B[1] => bit_adder_8:bit_2.B
+B[2] => bit_adder_8:bit_3.B
+B[3] => bit_adder_8:bit_4.B
+B[4] => bit_adder_8:bit_5.B
+B[5] => bit_adder_8:bit_6.B
+B[6] => bit_adder_8:bit_7.B
+B[7] => bit_adder_8:bit_8.B
+Sum[0] <= bit_adder_8:bit_1.Sum
+Sum[1] <= bit_adder_8:bit_2.Sum
+Sum[2] <= bit_adder_8:bit_3.Sum
+Sum[3] <= bit_adder_8:bit_4.Sum
+Sum[4] <= bit_adder_8:bit_5.Sum
+Sum[5] <= bit_adder_8:bit_6.Sum
+Sum[6] <= bit_adder_8:bit_7.Sum
+Sum[7] <= bit_adder_8:bit_8.Sum
+Carry <= bit_adder_8:bit_8.Carry
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_1
+A => not_gate:G1.I
+A => and_gate_3_input:G6.I1
+A => and_gate_3_input:G7.I1
+A => and_gate:G10.I1
+A => and_gate:G11.I1
+B => not_gate:G2.I
+B => and_gate_3_input:G5.I2
+B => and_gate_3_input:G7.I2
+B => and_gate:G9.I1
+B => and_gate:G11.I2
+C => not_gate:G3.I
+C => and_gate_3_input:G4.I3
+C => and_gate_3_input:G7.I3
+C => and_gate:G9.I2
+C => and_gate:G10.I2
+Sum <= or_gate_4_inputs:G8.O
+Carry <= or_gate_3_inputs:G12.O
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_1|not_gate:G1
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_1|not_gate:G2
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_1|not_gate:G3
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_1|and_gate_3_input:G4
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_1|and_gate_3_input:G5
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_1|and_gate_3_input:G6
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_1|and_gate_3_input:G7
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_1|or_gate_4_inputs:G8
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+I4 => O~2.IN1
+O <= O~2.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_1|and_gate:G9
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_1|and_gate:G10
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_1|and_gate:G11
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_1|or_gate_3_inputs:G12
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_2
+A => not_gate:G1.I
+A => and_gate_3_input:G6.I1
+A => and_gate_3_input:G7.I1
+A => and_gate:G10.I1
+A => and_gate:G11.I1
+B => not_gate:G2.I
+B => and_gate_3_input:G5.I2
+B => and_gate_3_input:G7.I2
+B => and_gate:G9.I1
+B => and_gate:G11.I2
+C => not_gate:G3.I
+C => and_gate_3_input:G4.I3
+C => and_gate_3_input:G7.I3
+C => and_gate:G9.I2
+C => and_gate:G10.I2
+Sum <= or_gate_4_inputs:G8.O
+Carry <= or_gate_3_inputs:G12.O
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_2|not_gate:G1
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_2|not_gate:G2
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_2|not_gate:G3
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_2|and_gate_3_input:G4
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_2|and_gate_3_input:G5
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_2|and_gate_3_input:G6
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_2|and_gate_3_input:G7
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_2|or_gate_4_inputs:G8
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+I4 => O~2.IN1
+O <= O~2.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_2|and_gate:G9
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_2|and_gate:G10
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_2|and_gate:G11
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_2|or_gate_3_inputs:G12
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_3
+A => not_gate:G1.I
+A => and_gate_3_input:G6.I1
+A => and_gate_3_input:G7.I1
+A => and_gate:G10.I1
+A => and_gate:G11.I1
+B => not_gate:G2.I
+B => and_gate_3_input:G5.I2
+B => and_gate_3_input:G7.I2
+B => and_gate:G9.I1
+B => and_gate:G11.I2
+C => not_gate:G3.I
+C => and_gate_3_input:G4.I3
+C => and_gate_3_input:G7.I3
+C => and_gate:G9.I2
+C => and_gate:G10.I2
+Sum <= or_gate_4_inputs:G8.O
+Carry <= or_gate_3_inputs:G12.O
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_3|not_gate:G1
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_3|not_gate:G2
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_3|not_gate:G3
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_3|and_gate_3_input:G4
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_3|and_gate_3_input:G5
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_3|and_gate_3_input:G6
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_3|and_gate_3_input:G7
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_3|or_gate_4_inputs:G8
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+I4 => O~2.IN1
+O <= O~2.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_3|and_gate:G9
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_3|and_gate:G10
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_3|and_gate:G11
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_3|or_gate_3_inputs:G12
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_4
+A => not_gate:G1.I
+A => and_gate_3_input:G6.I1
+A => and_gate_3_input:G7.I1
+A => and_gate:G10.I1
+A => and_gate:G11.I1
+B => not_gate:G2.I
+B => and_gate_3_input:G5.I2
+B => and_gate_3_input:G7.I2
+B => and_gate:G9.I1
+B => and_gate:G11.I2
+C => not_gate:G3.I
+C => and_gate_3_input:G4.I3
+C => and_gate_3_input:G7.I3
+C => and_gate:G9.I2
+C => and_gate:G10.I2
+Sum <= or_gate_4_inputs:G8.O
+Carry <= or_gate_3_inputs:G12.O
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_4|not_gate:G1
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_4|not_gate:G2
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_4|not_gate:G3
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_4|and_gate_3_input:G4
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_4|and_gate_3_input:G5
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_4|and_gate_3_input:G6
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_4|and_gate_3_input:G7
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_4|or_gate_4_inputs:G8
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+I4 => O~2.IN1
+O <= O~2.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_4|and_gate:G9
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_4|and_gate:G10
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_4|and_gate:G11
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_4|or_gate_3_inputs:G12
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_5
+A => not_gate:G1.I
+A => and_gate_3_input:G6.I1
+A => and_gate_3_input:G7.I1
+A => and_gate:G10.I1
+A => and_gate:G11.I1
+B => not_gate:G2.I
+B => and_gate_3_input:G5.I2
+B => and_gate_3_input:G7.I2
+B => and_gate:G9.I1
+B => and_gate:G11.I2
+C => not_gate:G3.I
+C => and_gate_3_input:G4.I3
+C => and_gate_3_input:G7.I3
+C => and_gate:G9.I2
+C => and_gate:G10.I2
+Sum <= or_gate_4_inputs:G8.O
+Carry <= or_gate_3_inputs:G12.O
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_5|not_gate:G1
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_5|not_gate:G2
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_5|not_gate:G3
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_5|and_gate_3_input:G4
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_5|and_gate_3_input:G5
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_5|and_gate_3_input:G6
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_5|and_gate_3_input:G7
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_5|or_gate_4_inputs:G8
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+I4 => O~2.IN1
+O <= O~2.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_5|and_gate:G9
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_5|and_gate:G10
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_5|and_gate:G11
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_5|or_gate_3_inputs:G12
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_6
+A => not_gate:G1.I
+A => and_gate_3_input:G6.I1
+A => and_gate_3_input:G7.I1
+A => and_gate:G10.I1
+A => and_gate:G11.I1
+B => not_gate:G2.I
+B => and_gate_3_input:G5.I2
+B => and_gate_3_input:G7.I2
+B => and_gate:G9.I1
+B => and_gate:G11.I2
+C => not_gate:G3.I
+C => and_gate_3_input:G4.I3
+C => and_gate_3_input:G7.I3
+C => and_gate:G9.I2
+C => and_gate:G10.I2
+Sum <= or_gate_4_inputs:G8.O
+Carry <= or_gate_3_inputs:G12.O
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_6|not_gate:G1
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_6|not_gate:G2
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_6|not_gate:G3
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_6|and_gate_3_input:G4
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_6|and_gate_3_input:G5
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_6|and_gate_3_input:G6
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_6|and_gate_3_input:G7
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_6|or_gate_4_inputs:G8
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+I4 => O~2.IN1
+O <= O~2.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_6|and_gate:G9
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_6|and_gate:G10
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_6|and_gate:G11
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_6|or_gate_3_inputs:G12
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_7
+A => not_gate:G1.I
+A => and_gate_3_input:G6.I1
+A => and_gate_3_input:G7.I1
+A => and_gate:G10.I1
+A => and_gate:G11.I1
+B => not_gate:G2.I
+B => and_gate_3_input:G5.I2
+B => and_gate_3_input:G7.I2
+B => and_gate:G9.I1
+B => and_gate:G11.I2
+C => not_gate:G3.I
+C => and_gate_3_input:G4.I3
+C => and_gate_3_input:G7.I3
+C => and_gate:G9.I2
+C => and_gate:G10.I2
+Sum <= or_gate_4_inputs:G8.O
+Carry <= or_gate_3_inputs:G12.O
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_7|not_gate:G1
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_7|not_gate:G2
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_7|not_gate:G3
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_7|and_gate_3_input:G4
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_7|and_gate_3_input:G5
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_7|and_gate_3_input:G6
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_7|and_gate_3_input:G7
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_7|or_gate_4_inputs:G8
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+I4 => O~2.IN1
+O <= O~2.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_7|and_gate:G9
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_7|and_gate:G10
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_7|and_gate:G11
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_7|or_gate_3_inputs:G12
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_8
+A => not_gate:G1.I
+A => and_gate_3_input:G6.I1
+A => and_gate_3_input:G7.I1
+A => and_gate:G10.I1
+A => and_gate:G11.I1
+B => not_gate:G2.I
+B => and_gate_3_input:G5.I2
+B => and_gate_3_input:G7.I2
+B => and_gate:G9.I1
+B => and_gate:G11.I2
+C => not_gate:G3.I
+C => and_gate_3_input:G4.I3
+C => and_gate_3_input:G7.I3
+C => and_gate:G9.I2
+C => and_gate:G10.I2
+Sum <= or_gate_4_inputs:G8.O
+Carry <= or_gate_3_inputs:G12.O
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_8|not_gate:G1
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_8|not_gate:G2
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_8|not_gate:G3
+I => O.DATAIN
+O <= I.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_8|and_gate_3_input:G4
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_8|and_gate_3_input:G5
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_8|and_gate_3_input:G6
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_8|and_gate_3_input:G7
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_8|or_gate_4_inputs:G8
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+I4 => O~2.IN1
+O <= O~2.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_8|and_gate:G9
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_8|and_gate:G10
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_8|and_gate:G11
+I1 => O~0.IN0
+I2 => O~0.IN1
+O <= O~0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|bit_adder_8_implementation:adderOutput|bit_adder_8:bit_8|or_gate_3_inputs:G12
+I1 => O~0.IN0
+I2 => O~0.IN1
+I3 => O~1.IN1
+O <= O~1.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|reg8:change_Register
+d[0] => q~7.DATAA
+d[1] => q~6.DATAA
+d[2] => q~5.DATAA
+d[3] => q~4.DATAA
+d[4] => q~3.DATAA
+d[5] => q~2.DATAA
+d[6] => q~1.DATAA
+d[7] => q~0.DATAA
+clk => q[0]~reg0.CLK
+clk => q[1]~reg0.CLK
+clk => q[2]~reg0.CLK
+clk => q[3]~reg0.CLK
+clk => q[4]~reg0.CLK
+clk => q[5]~reg0.CLK
+clk => q[6]~reg0.CLK
+clk => q[7]~reg0.CLK
+synch_reset => q~0.OUTPUTSELECT
+synch_reset => q~1.OUTPUTSELECT
+synch_reset => q~2.OUTPUTSELECT
+synch_reset => q~3.OUTPUTSELECT
+synch_reset => q~4.OUTPUTSELECT
+synch_reset => q~5.OUTPUTSELECT
+synch_reset => q~6.OUTPUTSELECT
+synch_reset => q~7.OUTPUTSELECT
+q[0] <= q[0]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[1] <= q[1]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[2] <= q[2]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[3] <= q[3]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[4] <= q[4]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[5] <= q[5]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[6] <= q[6]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+q[7] <= q[7]~reg0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|Vending_Machine|datapath:datapath_Process|comp8bit:comapring_price
+a[0] => Equal0.IN7
+a[0] => LessThan0.IN8
+a[0] => LessThan1.IN8
+a[1] => Equal0.IN6
+a[1] => LessThan0.IN7
+a[1] => LessThan1.IN7
+a[2] => Equal0.IN5
+a[2] => LessThan0.IN6
+a[2] => LessThan1.IN6
+a[3] => Equal0.IN4
+a[3] => LessThan0.IN5
+a[3] => LessThan1.IN5
+a[4] => Equal0.IN3
+a[4] => LessThan0.IN4
+a[4] => LessThan1.IN4
+a[5] => Equal0.IN2
+a[5] => LessThan0.IN3
+a[5] => LessThan1.IN3
+a[6] => Equal0.IN1
+a[6] => LessThan0.IN2
+a[6] => LessThan1.IN2
+a[7] => Equal0.IN0
+a[7] => LessThan0.IN1
+a[7] => LessThan1.IN1
+b[0] => Equal0.IN15
+b[0] => LessThan0.IN16
+b[0] => LessThan1.IN16
+b[1] => Equal0.IN14
+b[1] => LessThan0.IN15
+b[1] => LessThan1.IN15
+b[2] => Equal0.IN13
+b[2] => LessThan0.IN14
+b[2] => LessThan1.IN14
+b[3] => Equal0.IN12
+b[3] => LessThan0.IN13
+b[3] => LessThan1.IN13
+b[4] => Equal0.IN11
+b[4] => LessThan0.IN12
+b[4] => LessThan1.IN12
+b[5] => Equal0.IN10
+b[5] => LessThan0.IN11
+b[5] => LessThan1.IN11
+b[6] => Equal0.IN9
+b[6] => LessThan0.IN10
+b[6] => LessThan1.IN10
+b[7] => Equal0.IN8
+b[7] => LessThan0.IN9
+b[7] => LessThan1.IN9
+eq <= Equal0.DB_MAX_OUTPUT_PORT_TYPE
+gtr <= LessThan0.DB_MAX_OUTPUT_PORT_TYPE
+les <= LessThan1.DB_MAX_OUTPUT_PORT_TYPE
+
+

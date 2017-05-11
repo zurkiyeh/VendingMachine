@@ -1,4 +1,4 @@
-# VendingMachine
+# VHDL VendingMachine
 
 This is a VHDL project to implement a Vending Machine. The purpose of the project is to employ RTL design to implement a simple vending
 machine. For simplicity, the vending machine has two choices of items -This can easily be expanded to many more-. The value of each item 

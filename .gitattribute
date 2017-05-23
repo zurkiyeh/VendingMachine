@@ -1,4 +1,4 @@
-! *.vhd linguist-vendored
+# ! *.vhd linguist-vendored
 db/* linguist-vendored
 incremental_db/* linguist-vendored
 output_files linguist-vendored

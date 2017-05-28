@@ -17,14 +17,14 @@ This project was developed using Altera Quartus II Web Edition. Simply clone the
 
 ## Tests
 
-![Simulation 1](screenshots/Type1_soda.PNG)
-![Simulation 2](screenshots/Type0_soda.PNG)
-![Simulation 3](screenshots/Reset.PNG)
-![Simulation 4](screenshots/Subsequent_despences.PNG)
+![Simulation 1](/screenshots/Type1_soda.PNG)
+![Simulation 2](/screenshots/Type0_soda.PNG)
+![Simulation 3](/screenshots/Reset.PNG)
+![Simulation 4](/screenshots/Subsequent_despences.PNG)
 
 ## Contributors
 
-This project was developed with the help of [Abdul-Sattar Aboukarr](linkedin.com/in/abdul-sattar-aboukarr)
+This project was developed with the help of [Abdul-Sattar Aboukarr](https://www.linkedin.com/in/abdul-sattar-aboukarr)
 
 
 

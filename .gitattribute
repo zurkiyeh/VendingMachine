@@ -1,6 +1,5 @@
-# ! *.vhd linguist-vendored
-db/* linguist-vendored
-incremental_db/* linguist-vendored
-output_files linguist-vendored
-simulation linguist-vendored
-
+VendingMachine/db/* linguist-vendored
+VendingMachine/incremental_db/* linguist-vendored
+VendingMachine/output_files/* linguist-vendored
+VendingMachine/simulation/* linguist-vendored
+*.bak linguist-vendored
